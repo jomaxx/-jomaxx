@@ -58,7 +58,7 @@ polly.server
   .any('https://www.google.com/')
   .intercept((req, res) => res.sendStatus(500));
 
-test('is ok', async () => {
+test('is not ok', async () => {
   const response = await fetch('https://www.google.com/', { method: 'HEAD' });
   expect(response.ok).not.toBe(true);
 });
