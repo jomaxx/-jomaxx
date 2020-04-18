@@ -1,29 +1,20 @@
-import * as http from "http";
 import fetch from "node-fetch";
-import "./polly";
+import { polly } from "./polly";
 
-const server = http.createServer((_req, res) => {
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.write("Hello World!");
-  res.end();
+test("replays", async () => {
+  if (polly.mode === "record") {
+    const response = await fetch("https://httpstat.us/200"); // ensure there is a recording
+    expect(response.ok).toBe(true);
+  }
+
+  if (polly.mode === "replay") {
+    await new Promise((resolve) => {
+      polly.server.any().once("beforeReplay", (req) => {
+        expect(req.url).toBe("https://httpstat.us/200");
+        resolve();
+      });
+
+      fetch("https://httpstat.us/200");
+    });
+  }
 });
-
-beforeEach(() => {
-  server.listen(8080);
-});
-
-afterEach(() => {
-  server.close();
-});
-
-test("replays recording", async () => {
-  await fetchMessage(); // records if missing
-  server.close(); // go offline
-  const message = await fetchMessage(); // replays recording
-  expect(message).toBe("Hello World!");
-});
-
-async function fetchMessage() {
-  const response = await fetch("http://localhost:8080");
-  return response.text();
-}

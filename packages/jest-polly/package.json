@@ -21,5 +21,6 @@
     "@pollyjs/core": "^2.6.3",
     "@pollyjs/persister-fs": "^2.6.3",
     "@types/pollyjs__core": "^2.6.1"
-  }
+  },
+  "gitHead": "5639ec2775a6a52eb70d9820214922b13909227d"
 }
