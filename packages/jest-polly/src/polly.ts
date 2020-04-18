@@ -12,6 +12,7 @@ const dirname = path.dirname(testPath);
 const basename = path.basename(testPath);
 
 export const polly = new Polly(basename, {
+  mode: "replay",
   adapters: ["node-http"],
   persister: "fs",
   persisterOptions: {
@@ -19,7 +20,7 @@ export const polly = new Polly(basename, {
       recordingsDir: `${dirname}/__recordings__`,
     },
   },
-  recordIfMissing: process.env.CI ? false : true,
+  recordIfMissing: false,
   recordFailedRequests: true,
   matchRequestsBy: {
     order: false,
