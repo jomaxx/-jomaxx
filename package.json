@@ -10,7 +10,7 @@
     "test": "jest --ci",
     "add:dev": "yarn add --dev -W",
     "lerna:version": "lerna version",
-    "learn:publish": "lerna publish from-git --yes"
+    "lerna:publish": "yarn build && lerna publish from-git --yes"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
