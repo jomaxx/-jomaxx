@@ -6,35 +6,14 @@
   "repository": "git@github.com:jomaxx/jest-polly.git",
   "author": "Jo Maxx Blake <jo.maxx.blake@gmail.com>",
   "license": "MIT",
-  "main": "cjs/index.js",
-  "module": "esm/index.js",
-  "types": "types",
+  "main": "lib/index.js",
   "files": [
-    "cjs",
-    "esm",
-    "types"
+    "lib"
   ],
   "scripts": {
-    "lint": "web-scripts lint",
-    "test": "web-scripts test",
-    "build": "web-scripts build",
-    "commit": "web-scripts commit",
-    "release": "web-scripts release"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "web-scripts commitmsg",
-      "pre-commit": "web-scripts precommit"
-    }
-  },
-  "devDependencies": {
-    "@spotify/web-scripts": "^3.0.1",
-    "@types/jest": "^24.0.23",
-    "@types/node-fetch": "^2.5.3",
-    "@types/pollyjs__adapter-node-http": "^2.0.0",
-    "@types/pollyjs__persister-fs": "^2.0.0",
-    "husky": "^3.0.9",
-    "node-fetch": "^2.6.0"
+    "prebuild": "rm -rf lib",
+    "build": "tsc --declaration --outDir lib src/*.ts",
+    "postbuild": "rm lib/*.test.js lib/*.test.d.ts"
   },
   "dependencies": {
     "@pollyjs/adapter-node-http": "^2.6.3",

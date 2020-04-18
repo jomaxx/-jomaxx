@@ -1,7 +1,7 @@
-import path from 'path';
-import { Polly } from '@pollyjs/core';
-import FSPersister from '@pollyjs/persister-fs';
-import NodeHttpAdapter from '@pollyjs/adapter-node-http';
+import * as path from "path";
+import { Polly } from "@pollyjs/core";
+import FSPersister from "@pollyjs/persister-fs";
+import NodeHttpAdapter from "@pollyjs/adapter-node-http";
 
 Polly.register(NodeHttpAdapter);
 Polly.register(FSPersister);
@@ -12,8 +12,8 @@ const dirname = path.dirname(testPath);
 const basename = path.basename(testPath);
 
 export const polly = new Polly(basename, {
-  adapters: ['node-http'],
-  persister: 'fs',
+  adapters: ["node-http"],
+  persister: "fs",
   persisterOptions: {
     fs: {
       recordingsDir: `${dirname}/__recordings__`,

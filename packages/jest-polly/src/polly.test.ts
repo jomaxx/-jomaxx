@@ -1,10 +1,10 @@
-import http from 'http';
-import fetch from 'node-fetch';
-import './polly';
+import * as http from "http";
+import fetch from "node-fetch";
+import "./polly";
 
 const server = http.createServer((_req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.write('Hello World!');
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.write("Hello World!");
   res.end();
 });
 
@@ -16,14 +16,14 @@ afterEach(() => {
   server.close();
 });
 
-test('replays recording', async () => {
+test("replays recording", async () => {
   await fetchMessage(); // records if missing
   server.close(); // go offline
   const message = await fetchMessage(); // replays recording
-  expect(message).toBe('Hello World!');
+  expect(message).toBe("Hello World!");
 });
 
 async function fetchMessage() {
-  const response = await fetch('http://localhost:8080');
+  const response = await fetch("http://localhost:8080");
   return response.text();
 }
